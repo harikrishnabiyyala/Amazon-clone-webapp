@@ -1,6 +1,7 @@
 import React from "react";
 import "./Product.css";
 import { useStateValue } from "./StateProvider";
+import toast, { Toaster } from 'react-hot-toast';
 
 function Product({ id, title, image, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
@@ -18,6 +19,10 @@ function Product({ id, title, image, price, rating }) {
         rating: rating,
       },
     });
+    toast.success('Successfully Added item to the cart!', {
+      position: 'top-right',
+    });
+
   };
 
   return (
@@ -40,6 +45,11 @@ function Product({ id, title, image, price, rating }) {
       <img src={image} alt="" />
       {/* add handleadd to basket */}
       <button onClick={addToBasket}>Add to Basket</button>
+      <Toaster
+        containerStyle={{
+          top: 100,
+          right: 20,
+        }} />
     </div>
   );
 }
